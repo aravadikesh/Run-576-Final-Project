@@ -169,6 +169,7 @@ public class MeshGeneratorV2 : MonoBehaviour
 
         SpawnObjects();
         GetComponent<NavMeshSurface>().BuildNavMesh();
+        SpawnMonster();
     }
 
     private void SpawnObjects() 
@@ -217,6 +218,15 @@ public class MeshGeneratorV2 : MonoBehaviour
     //         Instantiate(questionStationPrefab, randomPosition, Quaternion.identity);
     //     }
     // }
+
+    
+    // Spawn question stations
+    private void SpawnMonster()
+    {
+        Vector3 worldPt = transform.TransformPoint(mesh.vertices[vertices.Length/2]);
+        GameObject objectToSpawn = monsterNPCPrefab;
+        Instantiate(objectToSpawn, new Vector3(mesh.vertices[vertices.Length/2].x * MESH_SCALE, mesh.vertices[vertices.Length/2].y * MESH_SCALE, mesh.vertices[vertices.Length/2].z * MESH_SCALE), Quaternion.identity);
+    }
 
     // // Note : This might infinitely loop, need to test what minDist will work best 
     // private bool IsTooCloseToOtherStations(Vector3 position, List<Vector3> existingPositions)
