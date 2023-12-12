@@ -12,7 +12,9 @@ public class QuestionManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI questionText, firstAnswer, secondAnswer, thirdAnswer, fourthAnswer;
     [SerializeField] private GameObject questionCapsule;
 
-    [SerializeField] private Transform parentPosition;
+    [SerializeField] private Transform parentPosition, tipPosition;
+
+    [SerializeField] private LineRenderer lineRenderer;
 
     private bool isActive = true;
 
@@ -73,7 +75,31 @@ public class QuestionManager : MonoBehaviour
         HideCanvas();
     }
 
-    public void OnAnswerButtonClick(int answerIndex)
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            OnAnswerSelect(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            OnAnswerSelect(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            OnAnswerSelect(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            OnAnswerSelect(3);
+        }
+
+        //manage waypoint
+        lineRenderer.SetPosition(0, tipPosition.position);
+        lineRenderer.SetPosition(1, tipPosition.position + new Vector3(0, 800, 0));
+    }
+
+    public void OnAnswerSelect(int answerIndex)
     {
         if (currQuestion.correctAnswerIndex == answerIndex)
         {
