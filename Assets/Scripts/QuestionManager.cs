@@ -1,8 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.IO;
+
+/*AUTHOR: YUSEF*/
 
 public class QuestionManager : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class QuestionManager : MonoBehaviour
     [SerializeField] private Canvas questionCanvas;
     [SerializeField] private TextMeshProUGUI questionText, firstAnswer, secondAnswer, thirdAnswer, fourthAnswer;
     [SerializeField] private GameObject questionCapsule;
+
+    [SerializeField] private Transform parentPosition, tipPosition;
+
+    [SerializeField] private LineRenderer lineRenderer;
 
     private bool isActive = true;
 
@@ -39,6 +44,7 @@ public class QuestionManager : MonoBehaviour
 
     void Start()
     {
+        questionsFile = "Assets/" + GameManager.Instance.Difficulty + "Questions.txt";
         LoadQuestions();
     }
 
@@ -70,27 +76,45 @@ public class QuestionManager : MonoBehaviour
         HideCanvas();
     }
 
-    public void OnAnswerButtonClick(int answerIndex)
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            OnAnswerSelect(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            OnAnswerSelect(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            OnAnswerSelect(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            OnAnswerSelect(3);
+        }
+
+        //manage waypoint
+        lineRenderer.SetPosition(0, tipPosition.position);
+        lineRenderer.SetPosition(1, tipPosition.position + new Vector3(0, 800, 0));
+    }
+
+    public void OnAnswerSelect(int answerIndex)
     {
         if (currQuestion.correctAnswerIndex == answerIndex)
         {
             GameManager.Instance.score += 1;
             GameManager.Instance.enemySpeed -= 1;
-            questionCapsule.GetComponentInChildren<Renderer>().material.color = Color.green;
         }
         else
         {
-            questionCapsule.GetComponentInChildren<Renderer>().material.color = Color.red;
+            GameManager.Instance.score -= 1;
+            GameManager.Instance.enemySpeed += 1;
         }
         HideCanvas();
-        StartCoroutine(Wait());
-    }
-
-    private IEnumerator Wait()
-    {
-        isActive = false;
-        yield return new WaitForSeconds(Random.Range(1, 10));
-        questionCapsule.GetComponentInChildren<Renderer>().material.color = Color.white;
-        isActive = true;
+        
+        parentPosition.position = new Vector3(Random.Range(0,250), 0, Random.Range(0,250));
+        parentPosition.GetComponent<Objects>().FindLand();
     }
 }
