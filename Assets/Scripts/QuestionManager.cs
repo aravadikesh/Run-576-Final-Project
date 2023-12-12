@@ -13,6 +13,8 @@ public class QuestionManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI questionText, firstAnswer, secondAnswer, thirdAnswer, fourthAnswer;
     [SerializeField] private GameObject questionCapsule;
 
+    [SerializeField] private Transform parentPosition;
+
     private bool isActive = true;
 
     private Question currQuestion;
@@ -78,21 +80,15 @@ public class QuestionManager : MonoBehaviour
         {
             GameManager.Instance.score += 1;
             GameManager.Instance.enemySpeed -= 1;
-            questionCapsule.GetComponentInChildren<Renderer>().material.color = Color.green;
         }
         else
         {
-            questionCapsule.GetComponentInChildren<Renderer>().material.color = Color.red;
+            GameManager.Instance.score -= 1;
+            GameManager.Instance.enemySpeed += 1;
         }
         HideCanvas();
-        StartCoroutine(Wait());
-    }
-
-    private IEnumerator Wait()
-    {
-        isActive = false;
-        yield return new WaitForSeconds(Random.Range(1, 10));
-        questionCapsule.GetComponentInChildren<Renderer>().material.color = Color.white;
-        isActive = true;
+        
+        parentPosition.position = new Vector3(Random.Range(0,250), 0, Random.Range(0,250));
+        parentPosition.GetComponent<Objects>().FindLand();
     }
 }

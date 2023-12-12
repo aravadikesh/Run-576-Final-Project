@@ -17,7 +17,6 @@ public class ObjectSpawner : MonoBehaviour
         SpawnQuestionTowers();
     }
 
-
     private void SpawnPlayer()
     {
         Instantiate(playerPrefab, playerPosition, Quaternion.identity);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7641946745682166356}
   - component: {fileID: 5748568061416136963}
   - component: {fileID: 6117990929300686015}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 5782292314019982373}
   - component: {fileID: 9057195459836377885}
   - component: {fileID: 4209295149318109198}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Answer3Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 6372508439606267038}
   - component: {fileID: 8689119269870896597}
   - component: {fileID: 5077538046851444831}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 9160420931998486324}
   - component: {fileID: 4629331741968744224}
   - component: {fileID: 6265485855300842741}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Answer2Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 7100526158738341283}
   - component: {fileID: 7273015973064958749}
   - component: {fileID: 7199442177177370111}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Answer4Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -677,7 +677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7503021865369383262}
   - component: {fileID: 20556918009175368}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Question Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 7669039590576317168}
   - component: {fileID: 9076481597496527798}
   - component: {fileID: 8140600560851379993}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 8026440475806884563}
   - component: {fileID: 938973040010928027}
   - component: {fileID: 3836021696944667366}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -944,7 +944,7 @@ GameObject:
   - component: {fileID: 4406402050236683930}
   - component: {fileID: 5264940880555550559}
   - component: {fileID: 875489119856154223}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: QuestionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1078,7 +1078,7 @@ GameObject:
   - component: {fileID: 5249652550083547548}
   - component: {fileID: 682089703301177823}
   - component: {fileID: 4244860095122463732}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1212,7 +1212,7 @@ GameObject:
   - component: {fileID: 8790680522854734484}
   - component: {fileID: 8163301587365811540}
   - component: {fileID: 6539195641115371954}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DetectionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1274,6 +1274,7 @@ MonoBehaviour:
   thirdAnswer: {fileID: 5307335014064391556}
   fourthAnswer: {fileID: 8643243221850041429}
   questionCapsule: {fileID: 8146093488066547058}
+  parentPosition: {fileID: 0}
   questionsFile: Assets\questions.txt
 --- !u!1 &5741588162197471787
 GameObject:
@@ -1287,7 +1288,7 @@ GameObject:
   - component: {fileID: 3862787041326539739}
   - component: {fileID: 2072076210562689513}
   - component: {fileID: 2366432544513716454}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: QuestionCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,7 +1397,7 @@ GameObject:
   - component: {fileID: 6968401334724576676}
   - component: {fileID: 8650110864241973714}
   - component: {fileID: 8643243221850041429}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Answer4Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1531,7 +1532,7 @@ GameObject:
   - component: {fileID: 8450540046516004193}
   - component: {fileID: 1347639399100385546}
   - component: {fileID: 8356987193788186400}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1637,7 +1638,7 @@ GameObject:
   - component: {fileID: 7599598025793714333}
   - component: {fileID: 679380180150287814}
   - component: {fileID: 8213059280532217364}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Answer1Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1771,7 +1772,7 @@ GameObject:
   - component: {fileID: 7644490195243359498}
   - component: {fileID: 3748021204581734647}
   - component: {fileID: 2488999775570213581}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Answer2Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1905,7 +1906,7 @@ GameObject:
   - component: {fileID: 297900697158289284}
   - component: {fileID: 7277203435433956194}
   - component: {fileID: 5307335014064391556}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Answer3Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2040,7 +2041,7 @@ GameObject:
   - component: {fileID: 1066965901855962160}
   - component: {fileID: 4024697675607688482}
   - component: {fileID: 2928967709957704717}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Answer1Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
