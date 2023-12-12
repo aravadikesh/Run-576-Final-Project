@@ -30,7 +30,6 @@ public class MeshGeneratorV2 : MonoBehaviour
     private Vector2[] octaveOffsets;
     [SerializeField] private Material material;
     [SerializeField] private MeshRenderer meshRenderer;
-
     public GameObject questionStationPrefab;   // Prefab for question station
     public GameObject monsterNPCPrefab;        // Prefab for chasing NPC
     public int numberOfQuestionStations = 5;   // Number of question stations to spawn
@@ -169,6 +168,7 @@ public class MeshGeneratorV2 : MonoBehaviour
 
         SpawnObjects();
         GetComponent<NavMeshSurface>().BuildNavMesh();
+        SpawnMonster();
     }
 
     private void SpawnObjects() 
@@ -182,7 +182,7 @@ public class MeshGeneratorV2 : MonoBehaviour
             if(System.Math.Abs(lastNoiseHeight - worldPt.y) < MESH_SCALE)
             {
                 // min height for object generation
-                if (noiseHeight > 15)
+                if (noiseHeight > 30)
                 {
                     // Chance to generate
                     if (Random.Range(1, 2) == 1)
@@ -217,6 +217,15 @@ public class MeshGeneratorV2 : MonoBehaviour
     //         Instantiate(questionStationPrefab, randomPosition, Quaternion.identity);
     //     }
     // }
+
+    
+    // Spawn question stations
+    private void SpawnMonster()
+    {
+        Vector3 worldPt = transform.TransformPoint(mesh.vertices[vertices.Length/2]);
+        GameObject objectToSpawn = monsterNPCPrefab;
+        Instantiate(objectToSpawn, new Vector3(mesh.vertices[vertices.Length/2].x * MESH_SCALE, mesh.vertices[vertices.Length/2].y * MESH_SCALE, mesh.vertices[vertices.Length/2].z * MESH_SCALE), Quaternion.identity);
+    }
 
     // // Note : This might infinitely loop, need to test what minDist will work best 
     // private bool IsTooCloseToOtherStations(Vector3 position, List<Vector3> existingPositions)
