@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+/*AUTHOR: EYAL*/
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,11 +15,6 @@ public class StartScreen : MonoBehaviour
         Play.onClick.AddListener(RunPlay);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void RunTutorial()
     {
 
@@ -29,5 +24,4 @@ public class StartScreen : MonoBehaviour
     {
         SceneManager.LoadScene("YusefScene", LoadSceneMode.Single);
     }
-
 }

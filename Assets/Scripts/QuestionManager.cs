@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using System.IO;
 
+/*AUTHOR: YUSEF*/
+
 public class QuestionManager : MonoBehaviour
 {
     private List<Question> questions = new List<Question>();

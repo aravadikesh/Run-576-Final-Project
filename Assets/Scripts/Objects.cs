@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+/*AUTHOR: YUSEF*/
+
 using UnityEngine;
 
 public class Objects : MonoBehaviour
 {
+    [SerializeField] private bool debug = false;
+
     void Start()
     {
         FindLand();
@@ -12,17 +14,20 @@ public class Objects : MonoBehaviour
     public void FindLand()
     {
         Ray ray = new Ray(transform.position, -transform.up);
-        RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo))
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
             transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y, hitInfo.point.z);
+            if(debug) Debug.Log("Land found in negative direction: " + hitInfo.point.ToString());
         }
+
         else
         {
             ray = new Ray(transform.position, transform.up);
             if (Physics.Raycast(ray, out hitInfo))
             {
                 transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y, hitInfo.point.z);
+                if(debug) Debug.Log("Land found in positive direction: " + hitInfo.point.ToString());
             }
         }
     }

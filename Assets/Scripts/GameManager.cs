@@ -1,3 +1,5 @@
+/*AUTHOR: YUSEF*/
+
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
