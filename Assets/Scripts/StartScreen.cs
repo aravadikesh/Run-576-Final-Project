@@ -1,20 +1,21 @@
 /*AUTHOR: EYAL*/
 
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartScreen : MonoBehaviour
 {
-    public Button Tutorial, Play, Back;
+    public Button Tutorial, EasyPlayButton, MediumPlayButton, HardPlayButton, Back;
     [SerializeField] private GameObject tutorialScreen;
     [SerializeField] private GameObject startScreen;
     // Start is called before the first frame update
     void Start()
     {
         Tutorial.onClick.AddListener(RunTutorial);
-        Play.onClick.AddListener(RunPlay);
+        EasyPlayButton.onClick.AddListener(EasyPlay);
+        MediumPlayButton.onClick.AddListener(MediumPlay);
+        HardPlayButton.onClick.AddListener(HardPlay);
         Back.onClick.AddListener(BackButton);
     }
 
@@ -31,8 +32,21 @@ public class StartScreen : MonoBehaviour
         startScreen.SetActive(true);
     }
 
-    void RunPlay()
+    void EasyPlay()
     {
+        GameManager.Instance.Difficulty = "easy";
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+    }
+
+    void MediumPlay()
+    {
+        GameManager.Instance.Difficulty = "medium";
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+    }
+
+    void HardPlay()
+    {
+        GameManager.Instance.Difficulty = "hard";
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
     }
 }

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public int lives = 3;
     public int enemySpeed = 1;
+    public string Difficulty;
 
     private void Awake()
     {

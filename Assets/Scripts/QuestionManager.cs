@@ -44,6 +44,7 @@ public class QuestionManager : MonoBehaviour
 
     void Start()
     {
+        questionsFile = "Assets/" + GameManager.Instance.Difficulty + "Questions.txt";
         LoadQuestions();
     }
 
