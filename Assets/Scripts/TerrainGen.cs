@@ -30,7 +30,6 @@ public class MeshGeneratorV2 : MonoBehaviour
     private Vector2[] octaveOffsets;
     [SerializeField] private Material material;
     [SerializeField] private MeshRenderer meshRenderer;
-
     public GameObject questionStationPrefab;   // Prefab for question station
     public GameObject monsterNPCPrefab;        // Prefab for chasing NPC
     public int numberOfQuestionStations = 5;   // Number of question stations to spawn
@@ -183,7 +182,7 @@ public class MeshGeneratorV2 : MonoBehaviour
             if(System.Math.Abs(lastNoiseHeight - worldPt.y) < MESH_SCALE)
             {
                 // min height for object generation
-                if (noiseHeight > 15)
+                if (noiseHeight > 30)
                 {
                     // Chance to generate
                     if (Random.Range(1, 2) == 1)
