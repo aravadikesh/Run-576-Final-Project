@@ -20,13 +20,16 @@ public class NPCBehavior : MonoBehaviour
     public float viewRadius = 30;                   
     public float viewAngle = 90;                    
     public LayerMask playerMask;                   
-    private bool m_playerInRange;                   
+    private bool m_playerInRange;  
+    private bool player_is_chaseable = false;                 
     private Vector3 m_PlayerPosition;               
     // Variables for wandering
     public float wanderRadius = 30f;  
     public float wanderTimer = 5f;   
     private float timer;
-    private bool isWandering;
+    private bool playerInRangeNotInLOS = false;
+    public float defaultFOV = 90f;
+    public float alertedFOV = 120f;
 
     void Start()
     {
@@ -34,7 +37,6 @@ public class NPCBehavior : MonoBehaviour
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speedWalk;
         timer = wanderTimer;
-        isWandering = false;
     }
 
     void Update()
@@ -43,18 +45,20 @@ public class NPCBehavior : MonoBehaviour
         {
             EnvironmentView();
 
-            if (!m_playerInRange)
+            if (player_is_chaseable)
             {
-                Wander();
-                
-                EnvironmentView();
-            }
-            else
-            {
+                AdjustFOV(alertedFOV);
                 TrackPlayer();
-            }
-
-            RotateInCircle();
+            } 
+            else if (playerInRangeNotInLOS)
+            {
+                AdjustFOV(alertedFOV);
+                Wander();
+            } else
+            {
+                AdjustFOV(defaultFOV);
+                Wander();
+            }     
         }
     }
 
@@ -62,11 +66,22 @@ public class NPCBehavior : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
 
+        if (colliders.Length != 0)
+        {
+            m_playerInRange = true;
+        } else 
+        {
+            m_playerInRange = false;
+        }
+
+        bool playerInLOS = false;
+
         for (int i = 0; i < colliders.Length; i++)
         {
             Transform target = colliders[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
             float angleToTarget = Vector3.Angle(transform.forward, dirToTarget);
+
 
             if (angleToTarget < viewAngle * 0.5f)
             {
@@ -74,31 +89,34 @@ public class NPCBehavior : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, dirToTarget, out hit, viewRadius, playerMask))
                 {
+                    playerInLOS = true;
                     m_playerInRange = true;
                     m_PlayerPosition = target.position;
+                    
                 }
-            } else {
-                m_playerInRange = false;
             }
         }
+
+        if (playerInLOS && m_playerInRange)
+        {
+            player_is_chaseable = true;
+        } else
+        {
+            player_is_chaseable = false;
+        }
+
+        // Set playerInRangeNotInLOS based on LOS and proximity
+        playerInRangeNotInLOS = m_playerInRange && !playerInLOS;
+    }
+
+    void AdjustFOV(float newFOV)
+    {
+        viewAngle = newFOV;
     }
 
     void TrackPlayer()
     {
-        if (m_playerInRange)
-        {
-            navMeshAgent.SetDestination(m_PlayerPosition);
-        }
-        else
-        {
-            RotateInCircle();
-        }
-    }
-
-    void RotateInCircle()
-    {
-        float rotationSpeed = 40f; 
-        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+        navMeshAgent.SetDestination(m_PlayerPosition);
     }
 
     void Wander()
@@ -107,6 +125,8 @@ public class NPCBehavior : MonoBehaviour
 
         if (timer >= wanderTimer)
         {
+            EnvironmentView(); 
+
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             navMeshAgent.SetDestination(newPos);
             timer = 0;
