@@ -16,7 +16,7 @@ public class QuestionManager : MonoBehaviour
 
     [SerializeField] private LineRenderer lineRenderer;
 
-    private bool isActive = true;
+    private bool isActive = false;
 
     private Question currQuestion;
     [SerializeField] private string questionsFile;
@@ -67,17 +67,24 @@ public class QuestionManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(!isActive) {return;}
+        isActive = true;
         DisplayQuestion();
     }
 
     void OnTriggerExit(Collider other)
     {
+        isActive = false;
         HideCanvas();
     }
 
     void Update()
     {
+        //manage waypoint
+        lineRenderer.SetPosition(0, tipPosition.position);
+        lineRenderer.SetPosition(1, tipPosition.position + new Vector3(0, 800, 0));
+
+        if (!isActive) return; //only check input if player in radius
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             OnAnswerSelect(0);
@@ -95,9 +102,7 @@ public class QuestionManager : MonoBehaviour
             OnAnswerSelect(3);
         }
 
-        //manage waypoint
-        lineRenderer.SetPosition(0, tipPosition.position);
-        lineRenderer.SetPosition(1, tipPosition.position + new Vector3(0, 800, 0));
+
     }
 
     public void OnAnswerSelect(int answerIndex)

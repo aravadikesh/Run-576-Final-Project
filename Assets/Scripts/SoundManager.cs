@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    //floats used to record the volume levels
-    public float masterVolume, effectsVolume, songsVolume;
 
     //arrays of the AudioSources to be played during the game
     public AudioSource[] effectAudioSources, songAudioSources;
@@ -48,7 +46,6 @@ public class SoundManager : MonoBehaviour
         if(effects.ContainsKey(name))
         {
             AudioSource sourceToPlay = effects[name];
-            sourceToPlay.volume = effectsVolume;
             sourceToPlay.Play();
         }
 
@@ -71,27 +68,20 @@ public class SoundManager : MonoBehaviour
         if(songs.ContainsKey(name))
         {
             AudioSource sourceToPlay = songs[name];
-            sourceToPlay.volume = songsVolume;
             sourceToPlay.Play();
             ///Debug.Log("just played song " + sourceToPlay.name);
         }
     }
 
-    //constantly update the master and songs volume. Effects volume is not updated since effects are transient and fleeting.
-    private void Update()
+    public void stopAllAudio()
     {
-        AudioListener.volume = masterVolume;
+        foreach(var a in effectAudioSources)
+        {
+            a.Stop();
+        }
         foreach(var a in songAudioSources)
         {
-            if(a.isPlaying)
-            {
-                a.volume = songsVolume;
-                //Debug.Log("song " + a.name + " is playing at volume " + a.volume.ToString());
-            }
-            else
-            {
-                //Debug.Log("song " + a.name + " is not playing");
-            }
+            a.Stop();
         }
     }
 }

@@ -7,8 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public int score = 0;
-    public int lives = 3;
-    public int enemySpeed = 1;
+    public float enemySpeed = 1;
     public string Difficulty;
 
     private void Awake()
@@ -25,5 +24,10 @@ public class GameManager : MonoBehaviour
     public void MenuScene()
     {
         SceneManager.LoadScene("MenuScene");
+    }
+
+    public void Update()
+    {
+        enemySpeed += Time.deltaTime / 10;
     }
 }

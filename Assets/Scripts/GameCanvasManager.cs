@@ -8,7 +8,7 @@ public class GameCanvasManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI stateText;
     void Update()
     {
-        string text = "Score: " + GameManager.Instance.score + "\nLives: " + GameManager.Instance.lives + "\nEnemy Speed: " + GameManager.Instance.enemySpeed;
+        string text = "Score: " + GameManager.Instance.score + "\nEnemy Speed: " + GameManager.Instance.enemySpeed;
         stateText.text = text;
     }
 }

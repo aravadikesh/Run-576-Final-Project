@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7089913551612857113}
   - component: {fileID: 1444561711016966928}
   - component: {fileID: 4042227922303889657}
+  - component: {fileID: 4238904540126132550}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPC
@@ -175,3 +176,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
+--- !u!114 &4238904540126132550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5842256418263962073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac49f87739c4164cbad8c014b93f8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 7089913551612857113}
