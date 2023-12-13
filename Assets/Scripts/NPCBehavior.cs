@@ -48,35 +48,7 @@ public class NPCBehavior : MonoBehaviour
         }
     }
 
-    // void EnvironmentView()
-    // {
-    //     // Detect all colliders within the view radius and player layer
-    //     Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
-
-    //     // Iterate through all detected colliders
-    //     for (int i = 0; i < playerInRange.Length; i++)
-    //     {
-    //         // Get the player's transform and direction to the player
-    //         Transform player = playerInRange[i].transform;
-    //         Vector3 dirToPlayer = (player.position - transform.position).normalized;
-
-    //         // Calculate the distance to the player
-    //         float dstToPlayer = Vector3.Distance(transform.position, player.position);
-
-    //         // Check if the player is within the chase radius
-    //         if (dstToPlayer <= chaseRadius)
-    //         {
-    //             m_playerInRange = true;
-    //             m_PlayerPosition = player.transform.position;
-    //         }
-    //         else
-    //         {
-    //             m_playerInRange = false;
-    //         }
-    //     }
-    // }
-
-        void EnvironmentView()
+    void EnvironmentView()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
 
