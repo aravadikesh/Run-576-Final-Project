@@ -1,5 +1,4 @@
 // Code written by Arav Adikesh Ramakrishnan
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,17 +11,19 @@ public class NPCBehavior : MonoBehaviour
     public float timeToRotate = 2;                  // Wait time when the enemy detects the player without visual contact
     public float speedWalk = 6;                     // Walking speed
     public float speedRun = 9;                      // Running speed
-    public float viewRadius = 15;                   // Radius of the enemy's field of vision
+    public float chaseRadius = 80;                  // Radius to chasing
+    public float minSpeed = 3;                      // Minimum speed when far from player
+    public float maxSpeed = 9;                      // Maximum speed when close to player
+    public float freezeDuration = 5;               // Duration to freeze NPC after achieving an objective
+    private bool isFrozen = false;                  // Flag to check if NPC is frozen
+
+    // Variables for player detection and chasing
+    public float viewRadius = 30;                   // Radius of the enemy's field of vision
     public float viewAngle = 90;                    // Angle of the enemy's field of vision
     public LayerMask playerMask;                    // Layer mask to detect the player
     public float meshResolution = 1.0f;             // Number of rays cast per degree for environment scanning
     public int edgeIterations = 4;                  // Number of iterations to enhance mesh filtering when rays hit obstacles
     public float edgeDistance = 0.5f;               // Maximum distance for raycasting when an obstacle is hit
-    public float chaseRadius = 10;                  // Radius to trigger faster chasing
-    public float minSpeed = 3;                      // Minimum speed when far from player
-    public float maxSpeed = 9;                      // Maximum speed when close to player
-    public float freezeDuration = 5;               // Duration to freeze NPC after achieving an objective
-    private bool isFrozen = false;                  // Flag to check if NPC is frozen
     
     // Variables for player detection and chasing
     private bool m_playerInRange;                   // If the player is in range of vision, state of chasing
@@ -41,52 +42,64 @@ public class NPCBehavior : MonoBehaviour
         // Check if the NPC is not frozen before updating its behavior
         if (!isFrozen)
         {
-            // Perform environment scanning and chase player if applicable
-            EnviromentView();
-            ChasePlayer();
+            // Directly track the player
+            EnvironmentView();
+            TrackPlayer();
         }
     }
 
-    // Function to handle chasing the player
-    void ChasePlayer()
+    void EnvironmentView()
     {
-        // Check if the player is in the chase range
-        if (m_playerInRange)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
+
+        for (int i = 0; i < colliders.Length; i++)
         {
-            // Move the NPC with speed based on the distance to the player
-            Move(Mathf.Lerp(minSpeed, maxSpeed, Vector3.Distance(transform.position, m_PlayerPosition) / chaseRadius));
-            navMeshAgent.SetDestination(m_PlayerPosition);
-        }
-    }
+            Transform target = colliders[i].transform;
+            Vector3 dirToTarget = (target.position - transform.position).normalized;
 
-    // Function to perform environment scanning to detect the player
-    void EnviromentView()
-    {
-        // Detect all colliders within the view radius and player layer
-        Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
+            // Calculate the angle between the NPC's forward direction and the direction to the target
+            float angleToTarget = Vector3.Angle(transform.forward, dirToTarget);
 
-        // Iterate through all detected colliders
-        for (int i = 0; i < playerInRange.Length; i++)
-        {
-            // Get the player's transform and direction to the player
-            Transform player = playerInRange[i].transform;
-            Vector3 dirToPlayer = (player.position - transform.position).normalized;
-
-            // Calculate the distance to the player
-            float dstToPlayer = Vector3.Distance(transform.position, player.position);
-
-            // Check if the player is within the chase radius
-            if (dstToPlayer <= chaseRadius)
+            // Check if the target is within the view angle
+            if (angleToTarget < viewAngle * 0.5f)
             {
-                m_playerInRange = true;
-                m_PlayerPosition = player.transform.position;
-            }
-            else
-            {
+                float dstToTarget = Vector3.Distance(transform.position, target.position);
+
+                // Perform additional checks like raycasting to ensure the target is within line of sight
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, dirToTarget, out hit, viewRadius, playerMask))
+                {
+                    m_playerInRange = true;
+                    m_PlayerPosition = target.position;
+                }
+            } else {
                 m_playerInRange = false;
             }
         }
     }
+
+    // Function to handle tracking the player
+    void TrackPlayer()
+    {
+        if (m_playerInRange) // Check if the player is within the NPC's detection range
+        {
+            // Move the NPC with speed based on the distance to the player
+            navMeshAgent.SetDestination(m_PlayerPosition);
+        }
+        else
+        {
+            // Rotate the NPC in a scanning circle
+            RotateInCircle();
+        }
+    }
+
+    // Function to rotate the NPC in a scanning circle
+    void RotateInCircle()
+    {
+        float rotationSpeed = 20f; // Adjust this to control the rotation speed
+        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+    }
+
 
     // Function to freeze the NPC for a specified duration
     void FreezeNPC()
