@@ -11,7 +11,7 @@ public class NPCBehavior : MonoBehaviour
     public float timeToRotate = 2;                  // Wait time when the enemy detects the player without visual contact
     public float speedWalk = 6;                     // Walking speed
     public float speedRun = 9;                      // Running speed
-    public float chaseRadius = 40;                  // Radius to trigger faster chasing
+    public float chaseRadius = 80;                  // Radius to chasing
     public float minSpeed = 3;                      // Minimum speed when far from player
     public float maxSpeed = 9;                      // Maximum speed when close to player
     public float freezeDuration = 5;               // Duration to freeze NPC after achieving an objective
@@ -48,31 +48,59 @@ public class NPCBehavior : MonoBehaviour
         }
     }
 
+    // void EnvironmentView()
+    // {
+    //     // Detect all colliders within the view radius and player layer
+    //     Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
 
-    // Function to perform environment scanning to detect the player
-    void EnvironmentView()
+    //     // Iterate through all detected colliders
+    //     for (int i = 0; i < playerInRange.Length; i++)
+    //     {
+    //         // Get the player's transform and direction to the player
+    //         Transform player = playerInRange[i].transform;
+    //         Vector3 dirToPlayer = (player.position - transform.position).normalized;
+
+    //         // Calculate the distance to the player
+    //         float dstToPlayer = Vector3.Distance(transform.position, player.position);
+
+    //         // Check if the player is within the chase radius
+    //         if (dstToPlayer <= chaseRadius)
+    //         {
+    //             m_playerInRange = true;
+    //             m_PlayerPosition = player.transform.position;
+    //         }
+    //         else
+    //         {
+    //             m_playerInRange = false;
+    //         }
+    //     }
+    // }
+
+        void EnvironmentView()
     {
-        // Detect all colliders within the view radius and player layer
-        Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
 
-        // Iterate through all detected colliders
-        for (int i = 0; i < playerInRange.Length; i++)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            // Get the player's transform and direction to the player
-            Transform player = playerInRange[i].transform;
-            Vector3 dirToPlayer = (player.position - transform.position).normalized;
+            Transform target = colliders[i].transform;
+            Vector3 dirToTarget = (target.position - transform.position).normalized;
 
-            // Calculate the distance to the player
-            float dstToPlayer = Vector3.Distance(transform.position, player.position);
+            // Calculate the angle between the NPC's forward direction and the direction to the target
+            float angleToTarget = Vector3.Angle(transform.forward, dirToTarget);
 
-            // Check if the player is within the chase radius
-            if (dstToPlayer <= chaseRadius)
+            // Check if the target is within the view angle
+            if (angleToTarget < viewAngle * 0.5f)
             {
-                m_playerInRange = true;
-                m_PlayerPosition = player.transform.position;
-            }
-            else
-            {
+                float dstToTarget = Vector3.Distance(transform.position, target.position);
+
+                // Perform additional checks like raycasting to ensure the target is within line of sight
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, dirToTarget, out hit, viewRadius, playerMask))
+                {
+                    m_playerInRange = true;
+                    m_PlayerPosition = target.position;
+                }
+            } else {
                 m_playerInRange = false;
             }
         }
@@ -84,7 +112,6 @@ public class NPCBehavior : MonoBehaviour
         if (m_playerInRange) // Check if the player is within the NPC's detection range
         {
             // Move the NPC with speed based on the distance to the player
-            Move(Mathf.Lerp(minSpeed, maxSpeed, Vector3.Distance(transform.position, m_PlayerPosition) / chaseRadius));
             navMeshAgent.SetDestination(m_PlayerPosition);
         }
         else

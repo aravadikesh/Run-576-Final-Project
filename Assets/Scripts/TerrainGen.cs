@@ -196,28 +196,6 @@ public class MeshGeneratorV2 : MonoBehaviour
             lastNoiseHeight = noiseHeight;
         }
     }
-
-    // // Spawn question stations
-    // private void SpawnQuestionStations()
-    // {
-    //     List<Vector3> questionStationPositions = new List<Vector3>();
-
-    //     for (int i = 0; i < numberOfQuestionStations; i++)
-    //     {
-    //         Vector3 randomPosition = GetRandomPositionOnMap();
-
-    //         // Check if the new position is too close to existing question stations
-    //         while (IsTooCloseToOtherStations(randomPosition, questionStationPositions))
-    //         {
-    //             randomPosition = GetRandomPositionOnMap();
-    //         }
-
-    //         questionStationPositions.Add(randomPosition);
-
-    //         Instantiate(questionStationPrefab, randomPosition, Quaternion.identity);
-    //     }
-    // }
-
     
     // Spawn question stations
     private void SpawnMonster()
@@ -226,40 +204,5 @@ public class MeshGeneratorV2 : MonoBehaviour
         GameObject objectToSpawn = monsterNPCPrefab;
         Instantiate(objectToSpawn, new Vector3(mesh.vertices[vertices.Length/2].x * MESH_SCALE, mesh.vertices[vertices.Length/2].y * MESH_SCALE, mesh.vertices[vertices.Length/2].z * MESH_SCALE), Quaternion.identity);
     }
-
-    // // Note : This might infinitely loop, need to test what minDist will work best 
-    // private bool IsTooCloseToOtherStations(Vector3 position, List<Vector3> existingPositions)
-    // {
-    //     foreach (Vector3 existingPosition in existingPositions)
-    //     {
-    //         float distance = Vector3.Distance(position, existingPosition);
-
-    //         // Adjust the minimum distance as needed
-    //         if (distance < minimumDistanceBetweenStations)
-    //         {
-    //             return true; // Too close, try a new position
-    //         }
-    //     }
-
-    //     return false; // Acceptable distance
-    // }
-
-    // // Spawn monster NPC
-    // private void SpawnMonsterNPC()
-    // {
-    //     Vector3 randomPosition = GetRandomPositionOnMap();
-    //     Instantiate(monsterNPCPrefab, randomPosition, Quaternion.identity);
-    // }
-
-    // // Get a random position within the map bounds
-    // private Vector3 GetRandomPositionOnMap()
-    // {
-    //     float randomX = Random.Range(0, xSize);
-    //     float randomZ = Random.Range(0, zSize);
-    //     //float height = GenerateNoiseHeight((int)randomZ, (int)randomX, octaveOffsets);
-        
-    //     // Ensure Y-coordinate is set to the generated noise height for the terrain
-    //     return new Vector3(randomX, 5, randomZ);
-    // }
 
 }
