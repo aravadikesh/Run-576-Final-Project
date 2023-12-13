@@ -977,22 +977,16 @@ MonoBehaviour:
   viewRadius: 15
   viewAngle: 90
   playerMask:
+    serializedVersion: 2
     m_Bits: 64
   obstacleMask:
+    serializedVersion: 2
     m_Bits: 128
   meshResolution: 1
   edgeIterations: 4
   edgeDistance: 0.5
   waypoints:
   - {fileID: 1795115904}
-  currentWaypointIndex: 0
-  lastKnownPlayerPosition: {x: 0, y: 0, z: 0}
-  waitTime: 0
-  timeToRotatePlayerNear: 0
-  isPatrolling: 1
-  caughtPlayer: 0
-  m_PlayerPosition: {x: 0, y: 0, z: 0}
-  m_PlayerNear: 0
 --- !u!195 &683068634
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1732,6 +1726,10 @@ MonoBehaviour:
   timeToRotate: 2
   speedWalk: 6
   speedRun: 9
+  chaseRadius: 10
+  minSpeed: 3
+  maxSpeed: 9
+  freezeDuration: 5
   viewRadius: 15
   viewAngle: 90
   playerMask:
@@ -1740,10 +1738,6 @@ MonoBehaviour:
   meshResolution: 1
   edgeIterations: 4
   edgeDistance: 0.5
-  chaseRadius: 10
-  minSpeed: 3
-  maxSpeed: 9
-  freezeDuration: 5
 --- !u!195 &1257267748
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1861,7 +1855,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257267746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6905621e514c448f298b58f0c9cbb261, type: 3}
   m_Name: 

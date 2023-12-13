@@ -89,7 +89,7 @@ public class NPCBehavior : MonoBehaviour
         else
         {
             // Rotate the NPC in a scanning circle
-            RotateInCircle();
+            //RotateInCircle();
         }
     }
 
