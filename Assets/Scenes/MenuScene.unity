@@ -2291,7 +2291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Fun New Educational Game That Will Keep You Hooked!
+  m_text: The Fun New Math That Will Keep You Hooked!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2421,7 +2421,6 @@ MonoBehaviour:
   - {fileID: 2020473231}
   - {fileID: 725580321}
   - {fileID: 1063194489}
-  songAudioSources: []
 --- !u!1 &1549692013
 GameObject:
   m_ObjectHideFlags: 0
