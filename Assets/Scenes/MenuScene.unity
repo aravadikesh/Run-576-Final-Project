@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  lives: 3
   enemySpeed: 1
   Difficulty: 
 --- !u!1 &74610104
@@ -913,11 +912,11 @@ MonoBehaviour:
 
 
     You find yourself in a strange world. There are
-    black knights patrolling the area, capturing whoever they notice.
+    [enemies] patrolling the area, capturing whoever they notice.
 
 
-    There
-    seems to be only one way to evade the knights - find the beacon tower and answer
+    There seems
+    to be only one way to slow down the [enemies] - find the beacon tower and answer
     the question it bestows upon you.
 
 
@@ -2417,15 +2416,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f586a2659ebd974babddb509f7570f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 1
-  effectsVolume: 1
-  songsVolume: 1
   effectAudioSources:
   - {fileID: 573442573}
   - {fileID: 2020473231}
   - {fileID: 725580321}
-  songAudioSources:
   - {fileID: 1063194489}
+  songAudioSources: []
 --- !u!1 &1549692013
 GameObject:
   m_ObjectHideFlags: 0
