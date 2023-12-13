@@ -7,7 +7,6 @@ public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] private List<Vector3> questionTowerPositions;
     [SerializeField] private Vector3 playerPosition;
-
     [SerializeField] private GameObject questionTowerPrefab;
     [SerializeField] private GameObject playerPrefab;
 
