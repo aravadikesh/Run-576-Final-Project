@@ -1,6 +1,7 @@
 /*AUTHOR: YUSEF*/
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,5 +15,15 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject);}
         else { Destroy(gameObject); }
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("EndScene");
+    }
+
+    public void MenuScene()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 }

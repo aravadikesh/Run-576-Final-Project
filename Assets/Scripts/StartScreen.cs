@@ -36,17 +36,20 @@ public class StartScreen : MonoBehaviour
     {
         GameManager.Instance.Difficulty = "easy";
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SoundManager.Instance.playSong("Music");
     }
 
     void MediumPlay()
     {
         GameManager.Instance.Difficulty = "medium";
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SoundManager.Instance.playSong("Music");
     }
 
     void HardPlay()
     {
         GameManager.Instance.Difficulty = "hard";
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SoundManager.Instance.playSong("Music");
     }
 }

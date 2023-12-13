@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4042227922303889657}
   m_Layer: 0
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,9 +158,10 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 64
-  meshResolution: 1
-  edgeIterations: 4
-  edgeDistance: 0.5
+  wanderRadius: 30
+  wanderTimer: 5
+  defaultFOV: 90
+  alertedFOV: 120
 --- !u!114 &4042227922303889657
 MonoBehaviour:
   m_ObjectHideFlags: 0
