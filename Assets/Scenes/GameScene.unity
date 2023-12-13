@@ -783,6 +783,7 @@ GameObject:
   - component: {fileID: 744128144}
   - component: {fileID: 744128143}
   - component: {fileID: 744128142}
+  - component: {fileID: 744128147}
   m_Layer: 6
   m_Name: TerrainGen
   m_TagString: Untagged
@@ -802,6 +803,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28562cbf349d9455c9be79069f54bc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: 0}
+  MESH_SCALE: 10
   heightCurve:
     serializedVersion: 2
     m_Curve:
@@ -965,6 +968,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &744128147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744128141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1246,10 @@ MonoBehaviour:
     type: 3}
   playerPrefab: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36,
     type: 3}
+  monsterNPCPrefab: {fileID: 5842256418263962073, guid: d4a763fe9ed5a42b18df36c9c7ed37e7,
+    type: 3}
+  mesh: {fileID: 0}
+  monsterAmount: 3
 --- !u!1001 &1172201421
 PrefabInstance:
   m_ObjectHideFlags: 0

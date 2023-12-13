@@ -9,8 +9,8 @@ using Unity.AI.Navigation;
 [RequireComponent(typeof(MeshFilter))]
 public class MeshGeneratorV2 : MonoBehaviour
 {
-    Mesh mesh;
-    private int MESH_SCALE = 10;
+    public Mesh mesh;
+    public int MESH_SCALE = 10;
     public AnimationCurve heightCurve;
     private Vector3[] vertices;
     private int[] triangles;
@@ -35,7 +35,7 @@ public class MeshGeneratorV2 : MonoBehaviour
     public int numberOfQuestionStations = 5;   // Number of question stations to spawn
     private float minimumDistanceBetweenStations = 10;  // Constraint for question station spacing
 
-    void Start()
+    void Awake()
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
@@ -168,7 +168,6 @@ public class MeshGeneratorV2 : MonoBehaviour
 
         SpawnObjects();
         GetComponent<NavMeshSurface>().BuildNavMesh();
-        SpawnMonster();
     }
 
     private void SpawnObjects() 
@@ -196,13 +195,4 @@ public class MeshGeneratorV2 : MonoBehaviour
             lastNoiseHeight = noiseHeight;
         }
     }
-    
-    // Spawn question stations
-    private void SpawnMonster()
-    {
-        Vector3 worldPt = transform.TransformPoint(mesh.vertices[vertices.Length/2]);
-        GameObject objectToSpawn = monsterNPCPrefab;
-        Instantiate(objectToSpawn, new Vector3(mesh.vertices[vertices.Length/2].x * MESH_SCALE, mesh.vertices[vertices.Length/2].y * MESH_SCALE, mesh.vertices[vertices.Length/2].z * MESH_SCALE), Quaternion.identity);
-    }
-
 }
