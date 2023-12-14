@@ -28,6 +28,6 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        enemySpeed += Time.deltaTime / 10;
+        enemySpeed += Time.deltaTime / 6;
     }
 }

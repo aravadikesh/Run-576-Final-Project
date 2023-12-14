@@ -101,8 +101,6 @@ public class QuestionManager : MonoBehaviour
         {
             OnAnswerSelect(3);
         }
-
-
     }
 
     public void OnAnswerSelect(int answerIndex)
@@ -110,13 +108,13 @@ public class QuestionManager : MonoBehaviour
         if (currQuestion.correctAnswerIndex == answerIndex)
         {
             GameManager.Instance.score += 1;
-            GameManager.Instance.enemySpeed -= 1;
+            GameManager.Instance.enemySpeed = Mathf.Max(0, GameManager.Instance.enemySpeed - 2);
             SoundManager.Instance.playEffect("Success");
         }
         else
         {
             GameManager.Instance.score -= 1;
-            GameManager.Instance.enemySpeed += 1;
+            GameManager.Instance.enemySpeed = Mathf.Max(0, GameManager.Instance.enemySpeed - 2);
             SoundManager.Instance.playEffect("Fail");
         }
         HideCanvas();
