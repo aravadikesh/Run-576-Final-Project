@@ -1,7 +1,7 @@
+/*AUTHOR: YUSEF*/
+
 using System.Collections.Generic;
 using UnityEngine;
-
-/*AUTHOR: Yusef*/
 
 public class ObjectSpawner : MonoBehaviour
 {

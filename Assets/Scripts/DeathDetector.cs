@@ -1,3 +1,5 @@
+/*AUTHOR: YUSEF*/
+
 using UnityEngine;
 
 public class DeathDetector : MonoBehaviour

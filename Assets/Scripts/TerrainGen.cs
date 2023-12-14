@@ -1,10 +1,7 @@
-// Code written by Arav Adikesh Ramakrishnan
+/*AUTHOR: ARAV*/
 
-using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
 using Unity.AI.Navigation;
-
 
 [RequireComponent(typeof(MeshFilter))]
 public class MeshGeneratorV2 : MonoBehaviour
